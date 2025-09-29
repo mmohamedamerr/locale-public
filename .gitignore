@@ -1,0 +1,14 @@
+# Environment variables (contains sensitive data)
+.env
+.env.local
+.env.production
+
+# Supabase credentials
+supabase-config.js
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db

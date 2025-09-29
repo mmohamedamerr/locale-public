@@ -603,6 +603,7 @@ nav a:hover {
 .pricing-cards {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     margin-top: 60px;
     max-width: 1000px;
@@ -628,12 +629,21 @@ nav a:hover {
 .card.starter {
     max-width: 350px;
     width: 100%;
+    border: 2px solid #000;
 }
 
 .card.pro {
     max-width: 320px;
     width: fit-content;
     min-width: 280px;
+    border: 2px solid transparent; /* needed for border-box gradient */
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff) border-box;
+    background-size: 100% 100%, 400% 400%;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    animation: gradientShift 8s ease infinite;
 }
 
 
@@ -642,11 +652,25 @@ nav a:hover {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
+.card.pro:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff) border-box;
+    background-size: 100% 100%, 400% 400%;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    animation: gradientShift 8s ease infinite;
+}
+
 .card.featured {
-    border: 2px solid #4ecdc4;
     box-shadow: 0 25px 50px rgba(78, 205, 196, 0.2);
     position: relative;
 }
+
+
 
 .card.featured::after {
     content: '';
@@ -669,6 +693,7 @@ nav a:hover {
 
 .card.featured:hover {
     transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
 .card h3 {
@@ -723,6 +748,18 @@ nav a:hover {
     color: #4ecdc4;
     font-weight: bold;
     font-size: 1.1rem;
+}
+
+/* Gradient checkmarks for Starter and Pro tiers */
+.card.starter li::before,
+.card.pro li::before {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    position: relative;
 }
 
 .card .primary-btn,
@@ -838,32 +875,38 @@ footer {
         padding: 0 15px;
     }
     
-    /* Header for small mobile */
+    /* Header for small mobile - keep desktop layout */
     header {
         padding: 10px 0;
     }
     
     header .container {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 5px 15px;
     }
     
     nav {
         gap: 15px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     nav a {
         font-size: 0.9rem;
         padding: 8px 12px;
-        border-radius: 6px;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
+        border-radius: 0;
+        background-color: transparent;
+        color: #555;
+        transition: color 0.3s ease;
     }
     
     nav a:hover {
-        background-color: #e9ecef;
-        transform: translateY(-1px);
+        background-color: transparent;
+        transform: none;
+        color: #007bff;
     }
     .logo {
         height: 35px;
@@ -961,10 +1004,11 @@ footer {
 
 /* Tablet and smaller screens */
 @media (max-width: 900px) {
-    /* Header improvements for mobile */
+    /* Header improvements for mobile - keep desktop layout */
     header .container {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 10px 20px;
     }
     
@@ -978,11 +1022,25 @@ footer {
         display: flex;
         gap: 20px;
         justify-content: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     nav a {
         margin-left: 0;
         font-size: 1rem;
+        color: #555;
+        background-color: transparent;
+        padding: 8px 12px;
+        border-radius: 0;
+        transition: color 0.3s ease;
+    }
+    
+    nav a:hover {
+        background-color: transparent;
+        transform: none;
+        color: #007bff;
     }
     /* Hero section mobile improvements */
     .hero-section {
@@ -1006,46 +1064,66 @@ footer {
 
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 15px;
+        max-width: 600px;
+        margin: 0 auto;
+        justify-content: center;
     }
     
     .stat-card {
-        padding: 25px 20px;
+        padding: 20px 15px;
+        text-align: center;
+    }
+    
+    .stat-item {
+        text-align: center;
     }
     
     .stat-item .number {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .stat-item h4 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .stat-item p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
     .pricing-cards {
         flex-direction: column;
         align-items: center;
         gap: 20px;
+        max-width: 100%;
+    }
+    
+    .card.pro {
+        order: 1;
+    }
+    
+    .card.starter {
+        order: 2;
     }
     
     .card {
-        max-width: 100%;
+        max-width: 350px;
         padding: 2rem;
         width: 100% !important;
         min-width: auto;
+        margin: 0 auto;
     }
     
     .card.starter,
     .card.pro {
-        max-width: 100%;
+        max-width: 350px;
         width: 100% !important;
+        margin: 0 auto;
     }
     
     .card.featured {
         transform: none;
+        border: 2px solid #4ecdc4;
     }
     
     .card.featured:hover {
@@ -1060,23 +1138,30 @@ footer {
 @media (max-width: 600px) {
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
+        max-width: 400px;
+        margin: 0 auto;
     }
     
     .stat-card {
-        padding: 20px 15px;
+        padding: 18px 12px;
+        text-align: center;
+    }
+    
+    .stat-item {
+        text-align: center;
     }
     
     .stat-item .number {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .stat-item h4 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .stat-item p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .feature-list {
@@ -1107,7 +1192,16 @@ footer {
     
     .feature-list {
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
+    }
+    
+    .feature-list ul {
+        gap: 8px;
+    }
+    
+    .feature-list li {
+        margin-bottom: 8px;
+        font-size: 0.95rem;
     }
 
     .footer-main {
@@ -1160,9 +1254,15 @@ footer {
     
     .card {
         padding: 1.5rem;
+        max-width: 300px;
+        margin: 0 auto;
     }
     
     .card .price {
-        font-size: 3rem;
+        font-size: 2.8rem;
+    }
+    
+    .pricing-cards {
+        gap: 15px;
     }
 }

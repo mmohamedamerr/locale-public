@@ -313,6 +313,12 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -367,6 +373,56 @@ nav a:hover {
     overflow: hidden;
 }
 
+.google-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.google-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-color: #dcdcdc;
+}
+
+.google-icon {
+    width: 22px;
+    height: 22px;
+}
+
+/* Preference transitions */
+.waitlist-content {
+    transition: all 0.35s ease;
+}
+
+.waitlist-content.prefers-email .join-btn {
+    transform: scale(1.04);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.waitlist-content.prefers-email .google-btn {
+    opacity: 0.6;
+    transform: scale(0.96);
+}
+
+.waitlist-content.prefers-google .google-btn {
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.waitlist-content.prefers-google .join-btn {
+    opacity: 0.75;
+    transform: scale(0.96);
+}
 .join-btn::before {
     content: '';
     position: absolute;

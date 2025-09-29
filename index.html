@@ -429,9 +429,15 @@
                         
                     } catch (supabaseError) {
                         console.error('Supabase submission failed:', supabaseError);
+                        console.error('Error details:', {
+                            message: supabaseError.message,
+                            code: supabaseError.code,
+                            details: supabaseError.details,
+                            hint: supabaseError.hint
+                        });
                         
                         // Show the actual error to help debug
-                        showMessage(`Database error: ${supabaseError.message}. Data saved locally.`, 'error');
+                        showMessage(`Database error: ${supabaseError.message}. Check console for details.`, 'error');
                         
                         // Fallback: Store in localStorage and show success
                         const waitlistData = JSON.parse(localStorage.getItem('localeWaitlist') || '[]');

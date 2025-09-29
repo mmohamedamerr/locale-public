@@ -123,14 +123,17 @@ header {
 
 header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
+    position: absolute;
+    left: 0;
 }
 
 .logo {
@@ -371,58 +374,10 @@ nav a:hover {
     animation: gradientShift 8s ease infinite;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
-.google-btn {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    min-height: 48px;
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-    background: #fff;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
 
-.google-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    border-color: #dcdcdc;
-}
-
-.google-icon {
-    width: 22px;
-    height: 22px;
-}
-
-/* Preference transitions */
-.waitlist-content {
-    transition: all 0.35s ease;
-}
-
-.waitlist-content.prefers-email .join-btn {
-    transform: scale(1.04);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.waitlist-content.prefers-email .google-btn {
-    opacity: 0.6;
-    transform: scale(0.96);
-}
-
-.waitlist-content.prefers-google .google-btn {
-    transform: scale(1.08);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-
-.waitlist-content.prefers-google .join-btn {
-    opacity: 0.75;
-    transform: scale(0.96);
-}
 .join-btn::before {
     content: '';
     position: absolute;
@@ -876,8 +831,40 @@ footer {
     border-top: 1px solid #e5e7eb;
 }
 
-/* --- Logo responsive adjustments --- */
+/* Small mobile devices */
 @media (max-width: 600px) {
+    /* Container padding for small screens */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Header for small mobile */
+    header {
+        padding: 10px 0;
+    }
+    
+    header .container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px 15px;
+    }
+    
+    nav {
+        gap: 15px;
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+        background-color: #e9ecef;
+        transform: translateY(-1px);
+    }
     .logo {
         height: 35px;
         max-width: 120px;
@@ -896,28 +883,71 @@ footer {
         max-width: 150px;
     }
     
+    /* Hero improvements for small mobile */
+    .hero-section {
+        padding: 40px 0;
+    }
+    
+    .hero-content {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 10px;
     }
     
     .hero-content p {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        padding: 0 5px;
+        line-height: 1.5;
+    }
+    
+    .hero-content .primary-btn {
+        font-size: 1rem;
+        padding: 15px 25px;
+        width: 100%;
+        max-width: 280px;
     }
     
     .app-screenshots {
         max-height: 400px;
     }
     
+    /* Waitlist section mobile improvements */
+    .waitlist-section {
+        padding: 60px 0;
+    }
+    
     .waitlist-section h2 {
         font-size: 2rem;
+        margin-bottom: 10px;
     }
     
     .waitlist-section p {
         font-size: 1rem;
+        margin-bottom: 30px;
     }
     
     .waitlist-content {
-        padding: 0 20px;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+    
+    .waitlist-form {
+        gap: 20px;
+    }
+    
+    .waitlist-form input {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    
+    .join-btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
     }
     
     .email-icon {
@@ -927,14 +957,51 @@ footer {
     }
 }
 
-/* --- Media Queries for basic responsiveness --- */
+/* --- Mobile Responsive Improvements --- */
+
+/* Tablet and smaller screens */
 @media (max-width: 900px) {
+    /* Header improvements for mobile */
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 20px;
+    }
+    
+    .logo-container {
+        position: static;
+        order: 1;
+    }
+    
+    nav {
+        order: 2;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    nav a {
+        margin-left: 0;
+        font-size: 1rem;
+    }
+    /* Hero section mobile improvements */
     .hero-section {
-        padding: 80px 0;
+        padding: 60px 0;
     }
     
     .hero-content {
-        gap: 25px;
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+        padding: 0 10px;
     }
 
     .stats-grid {
@@ -1054,5 +1121,48 @@ footer {
         padding: 12px 20px;
         font-size: 0.9rem;
     }
+}
+
+/* Extra small mobile devices (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 10px;
+    }
     
+    .hero-content h1 {
+        font-size: 1.8rem;
+        line-height: 1.1;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .waitlist-section h2 {
+        font-size: 1.7rem;
+    }
+    
+    .section-title-large {
+        font-size: 2rem;
+    }
+    
+    .feature-card {
+        padding: 25px 15px;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .pricing-section h2 {
+        font-size: 2rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .card .price {
+        font-size: 3rem;
+    }
 }
